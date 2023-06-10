@@ -1,0 +1,7 @@
+{
+    "i18n-ally.localesPaths": [
+        "webapp/src/locales"
+    ],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.defaultNamespace": "translation"
+}

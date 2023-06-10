@@ -1,0 +1,42 @@
+{
+  "translation": {
+    "Locals": "Locals",
+    "Gender": "Gender",
+    "Refugees": "Refugees",
+    "Total": "Total",
+    "Name": "Name",
+    "Birthday": "Birthday",
+    "Male": "Male",
+    "Female": "Female",
+    "Infants": "Infants",
+    "Teenagers": "Teenagers",
+    "Amount": "Amount",
+    "Status": "Status",
+    "Local": "Local",
+    "Refugee": "Refugee",
+    "Save": "Save",
+    "Daily report": "Daily report",
+    "Extended report": "Extended report",
+    "New search": "Search",
+    "New visitor": "New visitor",
+    "Enter name": "Enter name",
+    "Visit created": "Visit created",
+    "Can not create visit - no duplicates": "Can not create visit - found duplicates",
+    "User can have a lunch": "User can have a lunch",
+    "User already had a lunch": "User already had a lunch",
+    "New visitor created": "New visitor created",
+    "Adults": "Adults",
+    "Children": "Children",
+    "OlderAdults": "Older Adults",
+    "Search user": "Search user",
+    "Monthly report": "Monthly report",
+    "hasDisability": "Disability",
+    "disability__short": "Disab.",
+    "no_disability__short": "No disab.",
+    "with_disability": "With disabilities",
+    "translation": {
+      "date": "Date"
+    },
+    "visits": "Visit dates"
+  }
+}

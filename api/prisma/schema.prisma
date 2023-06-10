@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  Male
+  Female
+}
+
+enum VisitorStatus {
+  Local
+  Refugee
+}
+
+model Visitor {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  name     String
+  gender   Gender
+  birthday DateTime
+  status   VisitorStatus
+
+  hasDisability Boolean @default(false)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  visits Visits[]
+}
+
+model Visits {
+  visitorId String  @db.Uuid
+  visitor   Visitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@id([visitorId, createdAt])
+}

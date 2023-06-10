@@ -1,0 +1,42 @@
+{
+  "translation": {
+    "Name": "Ім'я",
+    "Birthday": "Дата народження",
+    "Gender": "Стать",
+    "Refugees": "ВПО",
+    "Total": "Кількість",
+    "Male": "Чоловік",
+    "Infants": "Немовлята",
+    "Teenagers": "Підлітки",
+    "Amount": "Сума",
+    "Female": "Жінка",
+    "Status": "Статус",
+    "Refugee": "ВПО",
+    "Local": "Місцевий",
+    "Daily report": "Щоденний звіт",
+    "Extended report": "Загальний звіт",
+    "Children": "Діти",
+    "Adults": "Дорослі",
+    "OlderAdults": "Літні",
+    "Locals": "Місцеві",
+    "Search user": "Пошук",
+    "Save": "Зберегти",
+    "New search": "Новий пошук",
+    "New visitor": "Новий відвідувач",
+    "Enter name": "Введіть ім'я",
+    "Visit created": "Успішна реєстрація",
+    "Can not create visit - no duplicates": "Неможливо зареєструвати повторний візит",
+    "User can have a lunch": "Вперше за сьогодні",
+    "User already had a lunch": "Порцію отримано",
+    "New visitor created": "Відвідувач додан до списків",
+    "Monthly report": "Звіт за місяць",
+    "hasDisability": "Інвалідність",
+    "disability__short": "Інвал.",
+    "no_disability__short": "Не інв.",
+    "with_disability": "Люди з інвалідністю",
+    "translation": {
+      "date": "Дата"
+    },
+    "visits": "Відвідування"
+  }
+}

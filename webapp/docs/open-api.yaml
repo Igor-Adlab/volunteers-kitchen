@@ -1,0 +1,435 @@
+openapi: 3.0.0
+paths:
+  /visitors:
+    post:
+      operationId: VisitorsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewVisitorDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorDto'
+      tags: &ref_0
+        - visitors
+    get:
+      operationId: VisitorsController_list
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitorDto'
+      tags: *ref_0
+  /visitors/search:
+    get:
+      operationId: VisitorsController_search
+      parameters:
+        - name: name
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitorDto'
+      tags: *ref_0
+  /visitors/{visitorId}/visit:
+    post:
+      operationId: VisitorsController_visit
+      parameters:
+        - name: visitorId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+  /visitors/{visitorId}:
+    patch:
+      operationId: VisitorsController_updateVisitor
+      parameters:
+        - name: visitorId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewVisitorDto'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisitorDto'
+      tags: *ref_0
+  /report/daily:
+    get:
+      operationId: ReportController_getDailyReport
+      parameters:
+        - name: day
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyReportDto'
+      tags: &ref_1
+        - reports
+  /report/weekly:
+    get:
+      operationId: ReportController_getWeeklyReport
+      parameters:
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeeklyReportDto'
+      tags: *ref_1
+  /report/monthly:
+    get:
+      operationId: ReportController_getMonthlyReport
+      parameters:
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyReportDto'
+      tags: *ref_1
+  /report/extended/monthly:
+    get:
+      operationId: ReportController_getExtendedMonthlyReport
+      parameters:
+        - name: to
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+        - name: from
+          required: true
+          in: query
+          schema:
+            format: date-time
+            type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisitorDto'
+      tags: *ref_1
+info:
+  title: Vol
+  description: Registration api
+  version: '0.1'
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    NewVisitorDto:
+      type: object
+      properties:
+        name:
+          type: string
+        birthday:
+          format: date-time
+          type: string
+        status:
+          type: string
+          enum:
+            - Local
+            - Refugee
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        hasDisability:
+          type: boolean
+      required:
+        - name
+        - birthday
+        - status
+        - gender
+        - hasDisability
+    VisitorDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        birthday:
+          format: date-time
+          type: string
+        hasDisability:
+          type: boolean
+        status:
+          type: string
+          enum: &ref_2
+            - Local
+            - Refugee
+        gender:
+          type: string
+          enum: &ref_3
+            - Male
+            - Female
+        visits:
+          type: array
+          items:
+            type: object
+      required:
+        - id
+        - name
+        - birthday
+        - hasDisability
+        - status
+        - gender
+    DailyVisitorDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        birthday:
+          format: date-time
+          type: string
+        hasDisability:
+          type: boolean
+        status:
+          type: string
+          enum: *ref_2
+        gender:
+          type: string
+          enum: *ref_3
+        visits:
+          type: array
+          items:
+            type: object
+        age:
+          type: number
+        group:
+          type: string
+          enum:
+            - Unknown
+            - Adults
+            - Infants
+            - Children
+            - Teenagers
+            - OlderAdults
+          default: Adults
+      required:
+        - id
+        - name
+        - birthday
+        - hasDisability
+        - status
+        - gender
+        - age
+        - group
+    DailyReportDto:
+      type: object
+      properties:
+        total:
+          type: number
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+      required:
+        - total
+        - visitors
+    AgeGroupGenderDto:
+      type: object
+      properties:
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+        gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        localsCount:
+          type: number
+        refugeesCount:
+          type: number
+        locals:
+          $ref: '#/components/schemas/DailyVisitorDto'
+        refugees:
+          $ref: '#/components/schemas/DailyVisitorDto'
+      required:
+        - visitors
+        - gender
+        - localsCount
+        - refugeesCount
+        - locals
+        - refugees
+    WeeklyAgeGroupDto:
+      type: object
+      properties:
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+        group:
+          type: string
+          enum:
+            - Unknown
+            - Adults
+            - Infants
+            - Children
+            - Teenagers
+            - OlderAdults
+        range:
+          type: string
+          enum:
+            - Unknown
+            - Adults
+            - Infants
+            - Children
+            - Teenagers
+            - OlderAdults
+        males:
+          $ref: '#/components/schemas/AgeGroupGenderDto'
+        females:
+          $ref: '#/components/schemas/AgeGroupGenderDto'
+      required:
+        - visitors
+        - group
+        - range
+        - males
+        - females
+    WeeklyReportDto:
+      type: object
+      properties:
+        total:
+          type: number
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeeklyAgeGroupDto'
+      required:
+        - total
+        - visitors
+        - groups
+    MonthlyAgeGroupDto:
+      type: object
+      properties:
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+        group:
+          type: string
+          enum:
+            - Unknown
+            - Adults
+            - Infants
+            - Children
+            - Teenagers
+            - OlderAdults
+        range:
+          type: string
+          enum:
+            - Unknown
+            - Adults
+            - Infants
+            - Children
+            - Teenagers
+            - OlderAdults
+        males:
+          $ref: '#/components/schemas/AgeGroupGenderDto'
+        females:
+          $ref: '#/components/schemas/AgeGroupGenderDto'
+      required:
+        - visitors
+        - group
+        - range
+        - males
+        - females
+    MonthlyReportDto:
+      type: object
+      properties:
+        total:
+          type: number
+        visitors:
+          type: array
+          items:
+            $ref: '#/components/schemas/DailyVisitorDto'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/MonthlyAgeGroupDto'
+      required:
+        - total
+        - visitors
+        - groups
